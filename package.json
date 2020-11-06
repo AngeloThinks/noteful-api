@@ -9,13 +9,13 @@
   "scripts": {
     "presetup": "[ -f \"./example.env\" ]  && (mv example.env .env && echo created '.env' file successfully) || echo \"'no example.env.' Skipping...\"",
     "setup": "node setup.js && rm -rf ./.git && git init && npm i",
+    "migrate": "postgrator --config postgrator-config.js",
+    "migrate:test": "env NODE_ENV=test npm run migrate",
+    "migrate:production": "heroku run npm run migrate",
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
     "test": "mocha --require test/setup.js",
     "tw": "mocha -- --watch --require test/setup.js",
-    "migrate": "postgrator --config postgrator-config.js",
-    "migrate:test": "env NODE_ENV=test npm run migrate",
-    "migrate:production": "heroku run npm run migrate",
     "deploy": "git push heroku main",
     "postdeploy": "npm run migrate:production"
   },
