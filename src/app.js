@@ -21,16 +21,17 @@ app.use(foldersRouter);
 //utilized through router.js files
 
 //generic error handler
-// app.use('/api/notes/', notesRouter, foldersRouter, (error, req, res, next) =>{
-// 	let response = null;
-//  	if ( NODE_ENV === 'production' ) {
-// 		response = { message : 'server error' };
-// 	} else {
-// 		console.log(error);
-// 		response = { error, message : error.message };
-// 	}
-// 	res.json(response);
-// });
+app.use('/api/notes/', notesRouter, foldersRouter, (error, req, res, next) =>{
+	let response = null;
+ 	if ( NODE_ENV === 'production' )  {
+         console.log(error)
+		response = { message : 'server error' };
+	} else {
+		console.log(error);
+		response = { error, message : error.message };
+	}
+	res.json(response);
+});
 
 
 module.exports = app;
